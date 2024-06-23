@@ -8,17 +8,17 @@ CREATE DATABASE db_gudang;
 -- Buat Tabel
 
 CREATE TABLE gudang (
-    kode serial PRIMARY KEY,
+    kode varchar(10) PRIMARY KEY,
     nama varchar(100) NOT NULL
 );
 
 CREATE TABLE barang (
-    kode serial PRIMARY KEY,
+    kode varchar(10) PRIMARY KEY,
     nama varchar(100) NOT NULL,
     harga int NOT NULL,
     jumlah int NOT NULL,
     expired date NOT NULL,
-    kode_gudang int,
+    kode_gudang varchar(10),
     FOREIGN KEY (kode_gudang) REFERENCES gudang(kode)
 );
 

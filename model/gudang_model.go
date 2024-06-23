@@ -1,6 +1,6 @@
 package model
 
 type Gudang struct {
-	Kode int    `json:"kode"`
+	Kode string    `json:"kode"`
 	Nama string `json:"nama"`
 }

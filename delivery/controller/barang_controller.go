@@ -1,7 +1,7 @@
 package controller
 
 import (
-	"barang/model"
+	"barang/model/dto/request"
 	"barang/model/dto/response"
 	"barang/usecase"
 	"net/http"
@@ -15,7 +15,7 @@ type BarangController struct {
 }
 
 func (cc *BarangController) registerHandler(ctx *gin.Context) {
-	var newBarang model.Barang
+	var newBarang request.BarangRequest
 	if err := ctx.ShouldBindJSON(&newBarang); err != nil {
 		response.SendSingleResponseError(
 			ctx,
@@ -57,7 +57,7 @@ func (cc *BarangController) findAllHandler(ctx *gin.Context) {
 }
 
 func (cc *BarangController) updateHandler(ctx *gin.Context) {
-	var barang model.Barang
+	var barang request.BarangRequest
 	if err := ctx.ShouldBindJSON(&barang); err != nil {
 		response.SendSingleResponseError(
 			ctx,

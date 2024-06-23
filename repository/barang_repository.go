@@ -2,14 +2,15 @@ package repository
 
 import (
 	"barang/model"
+	"barang/model/dto/request"
 	"barang/utils"
 	"database/sql"
 )
 
 type BarangRepository interface {
 	GetListBarang() ([]model.Barang, error)
-	InsertBarang(newBarang model.Barang) error
-	UpdateBarang(newBarang model.Barang) error
+	InsertBarang(newBarang request.BarangRequest) error
+	UpdateBarang(newBarang request.BarangRequest) error
 	DeleteBarangById(id string) error
 }
 
@@ -43,14 +44,14 @@ func (r *barangRepository) GetListBarang() ([]model.Barang, error) {
 	return barangs, nil
 }
 
-func (r *barangRepository) InsertBarang(newBarang model.Barang) error {
+func (r *barangRepository) InsertBarang(newBarang request.BarangRequest) error {
 	_, err := r.db.Exec(utils.CREATE_BARANG,
 		newBarang.Kode,
 		newBarang.Nama,
 		newBarang.Harga,
 		newBarang.Jumlah,
 		newBarang.Expired,
-		newBarang.Gudang.Kode,
+		newBarang.KodeGudang,
 	)
 	if err != nil {
 		return err
@@ -58,12 +59,13 @@ func (r *barangRepository) InsertBarang(newBarang model.Barang) error {
 	return nil
 }
 
-func (r *barangRepository) UpdateBarang(newBarang model.Barang) error {
+func (r *barangRepository) UpdateBarang(newBarang request.BarangRequest) error {
 	_, err := r.db.Exec(utils.UPDATE_BARANG,
 		newBarang.Nama,
 		newBarang.Harga,
 		newBarang.Jumlah,
 		newBarang.Expired,
+		newBarang.KodeGudang,
 		newBarang.Kode,
 	)
 	if err != nil {

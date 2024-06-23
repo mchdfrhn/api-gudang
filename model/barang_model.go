@@ -1,7 +1,7 @@
 package model
 
 type Barang struct {
-	Kode    int    `json:"kode"`
+	Kode    string    `json:"kode"`
 	Nama    string `json:"nama"`
 	Harga   int    `json:"harga"`
 	Jumlah  int    `json:"jumlah"`
